@@ -1,22 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
 
-class App extends Component {
-  constructor(props){
-    super(props);
+import App from './components/app';
+import reducers from './reducers';
 
-    this.state = {
-      message: "hi!"
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        {this.state.message}
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<App/>, document.querySelector('.container'))
+ReactDOM.render(
+  <Provider store={createStore(reducers)}>
+    <App />
+  </Provider>
+  , document.getElementById('container'));
