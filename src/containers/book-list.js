@@ -1,14 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectBook } from '../actions/index';
+import { fetchBooks } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
 class BookList extends Component {
+  componentWillMount() {
+      this.props.fetchBooks();
+  }
+
   renderList() {
+    if(!this.props.books.map) {
+      return (
+        <div>
+          Não foi possível recupurar os books, tente novamente mais tarde
+        </div>
+      );
+    }
     return this.props.books.map((book) => {
       return (
         <li
-          key={book.title}
+          key={book.id}
           onClick={() => this.props.selectBook(book)}
           className="list-group-item">
           {book.title}
@@ -33,7 +45,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectBook: selectBook}, dispatch);
+  return bindActionCreators({ selectBook: selectBook, fetchBooks: fetchBooks}, dispatch);
   // pass on to all the different reducers
 }
 

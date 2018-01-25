@@ -12,6 +12,7 @@ class BookDetail extends Component {
         <div className="card-body">
           <h3>Details for:</h3>
           <div>Title: {this.props.book.title}</div>
+          <div>Autor: {this.props.book.author}</div>
           <div>Pages: {this.props.book.pages}</div>
         </div>
       </div>
